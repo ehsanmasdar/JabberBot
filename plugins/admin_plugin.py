@@ -223,7 +223,7 @@ def handler_admin_join(type, source, parameters):
 		else:
 			join_groupchat(groupchat, DEFAULT_NICK, passw)
 		MACROS.load(groupchat)
-		reply(type, source, u'join to ' + groupchat)
+		reply(type, source, u'Joined ' + groupchat)
 #		if popups_check(groupchat):
 #			if reason:
 #				msg(groupchat, u'joined by '+source[2]+u' reason:\n'+reason)

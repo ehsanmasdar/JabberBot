@@ -1,4 +1,7 @@
-#$ neutron_plugin 01
+#===istalismanplugin===
+# -*- coding: utf-8 -*-
+
+#  rss_plugin.py
 
 from xml.sax import make_parser, handler
 
@@ -192,44 +195,44 @@ rss_read_file()
 ################################################################################
 
 def handler_rss_start(type, source, parameters):
-	thread.start_new(rss_query_channels_loop, ())
-	smsg(type, source, 'Enabled RSS')
+	threading.Thread(target=rss_query_channels_loop).start()
+	reply(type, source, 'Enabled RSS')
 
 def handler_rss_stop(type, source, parameters):
 	rss_end_loop()
-	smsg(type, source, 'Disabled RSS')
+	reply(type, source, 'Disabled RSS')
 
 def handler_rss_add(type, source, parameters):
 	if len(string.split(parameters)) > 1:
 		(name, url) = string.split(parameters)
 		rss_add_channel(name, url)	
-		smsg(type, source, 'Added: ' + name + ' - ' + url)
+		reply(type, source, 'Added: ' + name + ' - ' + url)
 	else:
-		smsg(type, source, 'Invalid Syntax')
+		reply(type, source, 'Invalid Syntax')
 
 def handler_rss_remove(type, source, parameters):
 	if len(string.split(parameters)) > 0:
 		name = parameters
 		rss_remove_channel(name)	
-		smsg(type, source, 'Removed: ' + name)
+		reply(type, source, 'Removed: ' + name)
 	else:
-		smsg(type, source, 'Invalid Syntax')
+		reply(type, source, 'Invalid Syntax')
 
 def handler_rss_subscribe(type, source, parameters):
 	if len(string.split(parameters)) > 1:
 		(name, jid) = string.split(parameters)
 		rss_subscribe(name, jid)	
-		smsg(type, source, 'Subscribed: ' + jid + ' to ' + name)
+		reply(type, source, 'Subscribed: ' + jid + ' to ' + name)
 	else:
-		smsg(type, source, 'Invalid Syntax')
+		reply(type, source, 'Invalid Syntax')
 
 def handler_rss_unsubscribe(type, source, parameters):
 	if len(string.split(parameters)) > 1:
 		(name, jid) = string.split(parameters)
 		rss_unsubscribe(name, jid)	
-		smsg(type, source, 'Unsubscribed: ' + jid + ' from ' + name)
+		reply(type, source, 'Unsubscribed: ' + jid + ' from ' + name)
 	else:
-		smsg(type, source, 'Invalid Syntax')
+		reply(type, source, 'Invalid Syntax')
 
 def handler_rss_info(type, source, parameters):
 	if parameters.strip():
@@ -240,12 +243,12 @@ def handler_rss_info(type, source, parameters):
 			message += ' ' + subscriber
 		if not len(RSS_CACHE['channels'][name]['subscribers']):
 			message += 'NONE'
-		smsg(type, source, message)
+		reply(type, source, message)
 	else:
 		message = 'Channels:'
 		for channel in RSS_CACHE['channels'].keys():
 			message += ' ' + channel
-		smsg(type, source, message)
+		reply(type, source, message)
 
 register_command_handler(handler_rss_start, '!rss_start', ['rss','all'], 100, 'Enables the RSS headline feature.', '!rss_start', ['!rss_start'])
 register_command_handler(handler_rss_stop, '!rss_stop', ['rss','all'], 100, 'Disables the RSS headline feature.', '!rss_stop', ['!rss_stop'])

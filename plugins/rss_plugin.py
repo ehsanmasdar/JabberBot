@@ -6,14 +6,14 @@
 from xml.sax import make_parser, handler
 
 RSS_CACHE_FILE = 'dynamic/RSS_CACHE.txt'
-RSS_INTERVAL = 30
+RSS_INTERVAL = 10
 RSS_QUERY_DELAY = 10
 RSS_ITEM_DELAY = 120
 
 RSS_CACHE = {}
 last_query = 0
 UNSENT_HEADLINES = []
-RSS_IS_ENABLED = 0
+RSS_IS_ENABLED = 1
 
 initialize_file(RSS_CACHE_FILE, "{'channels': {}}")
 

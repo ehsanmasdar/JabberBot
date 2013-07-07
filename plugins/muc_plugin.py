@@ -17,15 +17,15 @@
 #  GNU General Public License for more details. 
 
 
-#def handler_bot_nick(type, source, parameters):
-#	if not parameters:
-#		reply(type, source, u'hmmmm?')
-#		return
-#	else:
-#		add_gch(source[1], parameters)
-#		join_groupchat(source[1], parameters)
-#	reply(type, source, u'OK')
-#
+def handler_bot_nick(type, source, parameters):
+	if not parameters:
+		reply(type, source, u'hmmmm?')
+		return
+	else:
+		add_gch(source[1], parameters)
+		join_groupchat(source[1], parameters)
+	reply(type, source, u'OK')
+
 #def handler_admin(type, source, parameters):
 #	groupchat = source[1]
 #	if not parameters:
@@ -405,7 +405,7 @@ def order_unmember(groupchat, jid):
 	iq.addChild(node=query)
 	JCON.send(iq)
 
-#register_command_handler(handler_bot_nick, 'botnick', ['muc','all'], 20, 'changes the bots nickname in conference.', 'botnick <nick>', ['botnick pink'])
+register_command_handler(handler_bot_nick, 'botnick', ['muc','all'], 20, 'changes the bots nickname in conference.', 'botnick <nick>', ['botnick pink'])
 #register_command_handler(handler_admin, 'admin', ['muc','all'], 30, 'to let bot make someone an admin of conference.', 'admin <nick>', ['admin joe'])
 #register_command_handler(handler_owner, 'owner', ['muc','all'], 30, 'bot will make the specified person an ownerof the conference.', 'owner <nick>', ['owner fred'])
 #register_command_handler(handler_unban, 'unban', ['muc','all'], 20, 'to unban a person from the conference.', 'unban <jid>', ['unban guy@jsmart.web.id'])

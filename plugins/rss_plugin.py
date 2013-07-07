@@ -247,12 +247,12 @@ def handler_rss_info(type, source, parameters):
 			message += ' ' + channel
 		smsg(type, source, message)
 
-register_command_handler(handler_rss_start, '!rss_start', 100, 'Enables the RSS headline feature.', '!rss_start', ['!rss_start'])
-register_command_handler(handler_rss_stop, '!rss_stop', 100, 'Disables the RSS headline feature.', '!rss_stop', ['!rss_stop'])
-register_command_handler(handler_rss_add, '!rss_add', 100, 'Adds an RSS channel.', '!rss_add <name> <url>', ['!rss_add slashdot http://www.slashdot.org/slashdot.rdf'])
-register_command_handler(handler_rss_remove, '!rss_remove', 100, 'Removes an RSS channel.', '!rss_add <name>', ['!rss_remove slashdot'])
-register_command_handler(handler_rss_subscribe, '!rss_subscribe', 100, 'Subscribes a channel to an RSS channel.', '!rss_subscribe <name> <jid>', ['!rss_subscribe slashdot jabber@conference.jabber.org'])
-register_command_handler(handler_rss_unsubscribe, '!rss_unsubscribe', 100, 'Unsubscribes a channel from an RSS channel.', '!rss_unsubscribe <name> <jid>', ['!rss_unsubscribe slashdot jabber@conference.jabber.org'])
-register_command_handler(handler_rss_info, '!rss_info', 0, 'Requests information on specified RSS channel or gets the list of channels.', '!rss_info [name]', ['!rss_info slashdot', '!rss_info'])
+register_command_handler(handler_rss_start, '!rss_start', ['rss','all'], 100, 'Enables the RSS headline feature.', '!rss_start', ['!rss_start'])
+register_command_handler(handler_rss_stop, '!rss_stop', ['rss','all'], 100, 'Disables the RSS headline feature.', '!rss_stop', ['!rss_stop'])
+register_command_handler(handler_rss_add, '!rss_add', ['rss','all'], 100, 'Adds an RSS channel.', '!rss_add <name> <url>', ['!rss_add slashdot http://www.slashdot.org/slashdot.rdf'])
+register_command_handler(handler_rss_remove, '!rss_remove', ['rss','all'], 100, 'Removes an RSS channel.', '!rss_add <name>', ['!rss_remove slashdot'])
+register_command_handler(handler_rss_subscribe, '!rss_subscribe', ['rss','all'], 100, 'Subscribes a channel to an RSS channel.', '!rss_subscribe <name> <jid>', ['!rss_subscribe slashdot jabber@conference.jabber.org'])
+register_command_handler(handler_rss_unsubscribe, '!rss_unsubscribe', ['rss','all'], 100, 'Unsubscribes a channel from an RSS channel.', '!rss_unsubscribe <name> <jid>', ['!rss_unsubscribe slashdot jabber@conference.jabber.org'])
+register_command_handler(handler_rss_info, '!rss_info', ['rss','all'], 0, 'Requests information on specified RSS channel or gets the list of channels.', '!rss_info [name]', ['!rss_info slashdot', '!rss_info'])
 
 

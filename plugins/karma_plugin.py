@@ -18,7 +18,7 @@
 
 
 def karma_remove_html(text):
-  nobold = text.replace('<b>', '').replace('</b>', '')
+	nobold = text.replace('<b>', '').replace('</b>', '')
 	nobreaks = nobold.replace('<br>', ' ')
 	noescape = nobreaks.replace('&amp;', '&').replace('&lt;', '<').replace('&gt;', '>').replace('&quot;', '"')
 	return noescape

@@ -16,7 +16,8 @@ initialize_file(RSS_CACHE_FILE, "{'channels': {}}")
 
 ################################################################################
 
-import re
+""" Newer code
+
 def rss_remove_html(text):
 	exp = re.compile('<[^>]*>')
 	text = exp.sub('', text)
@@ -27,7 +28,7 @@ def rss_remove_html(text):
 	noescape = noescape.replace('&lt;p /&gt;', '').replace('&lt;p/&gt;', '')
 	return noescape
 
-""" OLD CODE: REMOVE LATER IF NEW FUNCTION (added 2005-10-12) WORKS
+""" 
 def rss_remove_html(text):
 	notags = text.replace('&lt;', '<').replace('&gt;', '>')
 	noescape = notags.replace('&amp;', '&').replace('&lt;', '<').replace('&gt;', '>').replace('&quot;', '"')
@@ -35,7 +36,6 @@ def rss_remove_html(text):
 	noescape = noescape.replace('&lt;/p&gt;', '')
 	noescape = noescape.replace('&lt;p /&gt;', '').replace('&lt;p/&gt;', '')
 	return noescape
-"""
 
 def rss_update_file():
 	global RSS_CACHE
@@ -254,4 +254,5 @@ register_command_handler(handler_rss_remove, '!rss_remove', 100, 'Removes an RSS
 register_command_handler(handler_rss_subscribe, '!rss_subscribe', 100, 'Subscribes a channel to an RSS channel.', '!rss_subscribe <name> <jid>', ['!rss_subscribe slashdot jabber@conference.jabber.org'])
 register_command_handler(handler_rss_unsubscribe, '!rss_unsubscribe', 100, 'Unsubscribes a channel from an RSS channel.', '!rss_unsubscribe <name> <jid>', ['!rss_unsubscribe slashdot jabber@conference.jabber.org'])
 register_command_handler(handler_rss_info, '!rss_info', 0, 'Requests information on specified RSS channel or gets the list of channels.', '!rss_info [name]', ['!rss_info slashdot', '!rss_info'])
+
 

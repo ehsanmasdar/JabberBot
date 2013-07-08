@@ -759,7 +759,7 @@ def dcHnd():
 	print 'DISCONNECTED'
 	if AUTO_RESTART:
 		print 'WAITING FOR RESTART...'
-		time.sleep(10)
+#		time.sleep(1)
 		print 'RESTARTING'
 		os.execl(sys.executable, sys.executable, sys.argv[0])
 	else:

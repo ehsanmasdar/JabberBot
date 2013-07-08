@@ -55,7 +55,7 @@ def handler_update_lastrev(type, source, parameters):
 		reply(type,source,u'auto-update new audit every hour DISABLE')	
 	elif parameters=='*':
 		update_work(known=True)
-		reply(type,source,u'more than a nuisance :) to the new audit...')	
+		reply(type,source,u'Reminder disabled till next update.')	
 	else:		
 		reply(type,source,u'latest revision of bot in SVN trunk branch - %s\nyour audit - %d\ncomment to the audit:\n\n%s' % (update_lastrev(), BOT_VER['rev'], update_lastrev_comment()))
 	

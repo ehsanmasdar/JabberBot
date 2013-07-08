@@ -4,6 +4,9 @@
 # Назначение рандомных приветствий на AFFILIATION (owner, admin, member, none)
 # Написал: Gigabyte
 # 
+import time
+timeSet = 0
+startTime = 0
 
 def greetex_work_2(aff='',greet='',gch=''):
 	gr = ''
@@ -170,107 +173,111 @@ def check_file_ex(gch='',file=''):
 			return 0
 
 def atjoin_greetex(groupchat, nick, aff, role):
-	global mute
-	global version
-	version = ['[empty]','[empty]','[empty]']
-	y = 0
-	res_1 = ''
+    global timeSet
+    global startTime
+    if timeSet == 0:
+        startTime = time.time()
+        timeSet = 1
+    if time.time()-startTime > 1:
+		global mute
+		global version
+		version = ['[empty]','[empty]','[empty]']
+		y = 0
+		res_1 = ''
 # terdapat stud Тут какой то косяк
-	if 1==1:
+		if 1==1:
 #		mute = 0
-		DBPATH='dynamic/'
-		if check_file_ex(DBPATH, 'blacklist.list'):
-			data = eval(read_file(DBPATH+'blacklist.list'))
-		if (get_true_jid(groupchat+'/'+nick)).lower() in data.keys():
-			if data[(get_true_jid(groupchat+'/'+nick)).lower()] == '3':
-				reply('public', [groupchat+'/'+nick, groupchat, nick], u'Ты снова выходишь на связь, мудило?')
-				return
-			if data[(get_true_jid(groupchat+'/'+nick)).lower()] == '2':
-				msg(groupchat, u'/me видит почётного флудераста - ' + nick)
-				return
-			if data[(get_true_jid(groupchat+'/'+nick)).lower()] == '1':
-				reply('public', [groupchat+'/'+nick, groupchat, nick], u'Again, we will flood or?')
-				return
+			DBPATH='dynamic/'
+			if check_file_ex(DBPATH, 'blacklist.list'):
+				data = eval(read_file(DBPATH+'blacklist.list'))
+			if (get_true_jid(groupchat+'/'+nick)).lower() in data.keys():
+				if data[(get_true_jid(groupchat+'/'+nick)).lower()] == '3':
+					reply('public', [groupchat+'/'+nick, groupchat, nick], u'Ты снова выходишь на связь, мудило?')
+					return
+				if data[(get_true_jid(groupchat+'/'+nick)).lower()] == '2':
+					msg(groupchat, u'/me видит почётного флудераста - ' + nick)
+					return
+				if data[(get_true_jid(groupchat+'/'+nick)).lower()] == '1':
+					reply('public', [groupchat+'/'+nick, groupchat, nick], u'Again, we will flood or?')
+					return
 
 
-		DBPATH='dynamic/'+groupchat+'/greetex.txt'
-		if check_file(groupchat,'greetex.txt'):
-			GREETEX = eval(read_file(DBPATH))
-			if aff in GREETEX.keys():
-				mas = GREETEX[aff]
-				res = random.choice(mas)
+			DBPATH='dynamic/'+groupchat+'/greetex.txt'
+			if check_file(groupchat,'greetex.txt'):
+				GREETEX = eval(read_file(DBPATH))
+				if aff in GREETEX.keys():
+					mas = GREETEX[aff]
+					res = random.choice(mas)
 
-				res_ = string.split(res, ' ', res.count(' '))
-
-
-
-				while y != len(res_):
-#					if '%NICK%' == res_[y]:
-					if res_[y].count('%NICK%')>0:
-						if res_[y].count(',')>0:
-							res_[y] = nick+','
-						if res_[y].count('.')>0:
-							res_[y] = nick+'.'
-						if res_[y].count('!')>0:
-							res_[y] = nick+'!'
-						if res_[y].count('?')>0:
-							res_[y] = nick+'?'
-						if (res_[y].count(',')==0) & (res_[y].count('.')==0) & (res_[y].count('!')==0) & (res_[y].count('?')==0):
-							res_[y] = nick
-					version[0] = '[empty]'
-					version[1] = '[empty]'
-					version[2] = '[empty]'
-					if ( res.count('%VER_NAME%')>0 ) | ( res.count('%VER_VER%')>0 ) | ( res.count('%VER_OS%')>0 ):
-						handler_version_ex('public', [groupchat+'/'+nick, groupchat, nick], '')
-						time.sleep(6.0)
-
-					if res_[y].count('%VER_NAME%')>0:
-						if res_[y].count(',')>0:
-							res_[y] = version[0]+','
-						if res_[y].count('.')>0:
-							res_[y] = version[0]+'.'
-						if res_[y].count('!')>0:
-							res_[y] = version[0]+'!'
-						if res_[y].count('?')>0:
-							res_[y] = version[0]+'?'
-						if (res_[y].count(',')==0) & (res_[y].count('.')==0) & (res_[y].count('!')==0) & (res_[y].count('?')==0):
-							res_[y] = version[0]
+					res_ = string.split(res, ' ', res.count(' '))
 
 
-					if res_[y].count('%VER_VER%')>0:
-						if res_[y].count(',')>0:
-							res_[y] = version[1]+','
-						if res_[y].count('.')>0:
-							res_[y] = version[1]+'.'
-						if res_[y].count('!')>0:
-							res_[y] = version[1]+'!'
-						if res_[y].count('?')>0:
-							res_[y] = version[1]+'?'
-						if (res_[y].count(',')==0) & (res_[y].count('.')==0) & (res_[y].count('!')==0) & (res_[y].count('?')==0):
-							res_[y] = version[1]
+
+					while y != len(res_):
+#						if '%NICK%' == res_[y]:
+						if res_[y].count('%NICK%')>0:
+							if res_[y].count(',')>0:
+								res_[y] = nick+','
+							if res_[y].count('.')>0:
+								res_[y] = nick+'.'
+							if res_[y].count('!')>0:
+								res_[y] = nick+'!'
+							if res_[y].count('?')>0:
+								res_[y] = nick+'?'
+							if (res_[y].count(',')==0) & (res_[y].count('.')==0) & (res_[y].count('!')==0) & (res_[y].count('?')==0):
+								res_[y] = nick
+						version[0] = '[empty]'
+						version[1] = '[empty]'
+						version[2] = '[empty]'
+						if ( res.count('%VER_NAME%')>0 ) | ( res.count('%VER_VER%')>0 ) | ( res.count('%VER_OS%')>0 ):
+							handler_version_ex('public', [groupchat+'/'+nick, groupchat, nick], '')
+							time.sleep(6.0)
+
+						if res_[y].count('%VER_NAME%')>0:
+							if res_[y].count(',')>0:
+								res_[y] = version[0]+','
+							if res_[y].count('.')>0:
+								res_[y] = version[0]+'.'
+							if res_[y].count('!')>0:
+								res_[y] = version[0]+'!'
+							if res_[y].count('?')>0:
+								res_[y] = version[0]+'?'
+							if (res_[y].count(',')==0) & (res_[y].count('.')==0) & (res_[y].count('!')==0) & (res_[y].count('?')==0):
+								res_[y] = version[0]
 
 
-					if res_[y].count('%VER_OS%')>0:
-						if res_[y].count(',')>0:
-							res_[y] = version[2]+','
-						if res_[y].count('.')>0:
-							res_[y] = version[2]+'.'
-						if res_[y].count('!')>0:
-							res_[y] = version[2]+'!'
-						if res_[y].count('?')>0:
-							res_[y] = version[2]+'?'
-						if (res_[y].count(',')==0) & (res_[y].count('.')==0) & (res_[y].count('!')==0) & (res_[y].count('?')==0):
-							res_[y] = version[2]
+						if res_[y].count('%VER_VER%')>0:
+							if res_[y].count(',')>0:
+								res_[y] = version[1]+','
+							if res_[y].count('.')>0:
+								res_[y] = version[1]+'.'
+							if res_[y].count('!')>0:
+								res_[y] = version[1]+'!'
+							if res_[y].count('?')>0:
+								res_[y] = version[1]+'?'
+							if (res_[y].count(',')==0) & (res_[y].count('.')==0) & (res_[y].count('!')==0) & (res_[y].count('?')==0):
+								res_[y] = version[1]
 
-					res_1 = res_1 + res_[y]
-					res_1 = res_1 + ' '
-					y = y + 1
+
+						if res_[y].count('%VER_OS%')>0:
+							if res_[y].count(',')>0:
+								res_[y] = version[2]+','
+							if res_[y].count('.')>0:
+								res_[y] = version[2]+'.'
+							if res_[y].count('!')>0:
+								res_[y] = version[2]+'!'
+							if res_[y].count('?')>0:
+								res_[y] = version[2]+'?'
+							if (res_[y].count(',')==0) & (res_[y].count('.')==0) & (res_[y].count('!')==0) & (res_[y].count('?')==0):
+								res_[y] = version[2]
+
+						res_1 = res_1 + res_[y]
+						res_1 = res_1 + ' '
+						y = y + 1
 					
-				msg(groupchat, res_1)
-
-#			if groupchat in GREETEX.keys():
-#	 			if aff in GREETEX[groupchat]:
-
+					msg(groupchat, res_1)
+    else:
+	    return
 
 
 

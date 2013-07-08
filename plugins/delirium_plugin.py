@@ -196,11 +196,11 @@ def handler_kick_ass(type, source, parameters):
 			if msgnum>500 or smlnum>500:
 				reply(type,source,u'sorry :-(')
 				return
-			reply(type,source,u'PERHATIAN SPAMMING!!!')
+			reply(type,source,u'Initiate Spamtron 3000')
 			if splitdata[0]==u':)':
 				for x in range(0, msgnum):
 					for y in range(0, smlnum):
-						rep += u'*CRAZY* '
+						rep += u':) '
 					msg(source[1], rep)
 					rep = ''
 #					time.sleep(0.5)
@@ -212,11 +212,11 @@ def handler_kick_ass(type, source, parameters):
 				print jid
 				for x in range(0, msgnum):
 					for y in range(0, smlnum):
-						rep += u'*CRAZY* '
+						rep += u':) '
 					msg(jid, rep)
 					rep=''
 #					time.sleep(0.5)
-			reply(type,source,u'Sukses!!!')
+			reply(type,source,u'Success!!!')
 		else:
 			reply(type,source,u'read "help spam"')
 	

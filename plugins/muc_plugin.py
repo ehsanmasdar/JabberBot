@@ -245,24 +245,27 @@ def handler_bot_nick(type, source, parameters):
 				#reply(type, source, u'Готово')
 				#return
 
-#def handler_where(type, source, parameters):
-#	#reply(type, source, 'я сижу в '+str(len(GROUPCHATS.keys()))+' комнатах:\n'+'\n'.join(GROUPCHATS.keys()).encode('utf8')) #+' ['+str(len(GROUPCHATS.has_key(GROUPCHATS.keys()))))
-#	cnt = 0
-#	gch = ''
-#	gch_cnt = []
-#	for gch in GROUPCHATS.keys():
-#		for nicks in GROUPCHATS[gch]:
-#			#if user_level(gch+'/'+nicks,gch)>=0:
-#				cnt += 1
-#		gch_cnt.append((gch, cnt))
-#		cnt = 0
-#	n = 1
-#	msg = u'Total number of conferences: '+str(len(gch_cnt))+'\n'
-#	for i in gch_cnt:
-#		msg += str(n)+'. '+i[0]+' ['+str(i[1])+']\n'
-#		n += 1
-#	reply(type, source, msg)
-	
+def handler_where(type, source, parameters):
+	reply(type, source, 'я сижу в '+str(len(GROUPCHATS.keys()))+' комнатах:\n'+'\n'.join(GROUPCHATS.keys()).encode('utf8')) #+' ['+str(len(GROUPCHATS.has_key(GROUPCHATS.keys()))))
+	cnt = 0
+	gch = ''
+	gch_cnt = []
+	for gch in GROUPCHATS.keys():
+		for nicks in GROUPCHATS[gch]:
+			#if user_level(gch+'/'+nicks,gch)>=0:
+				cnt += 1
+		gch_cnt.append((gch, cnt))
+		cnt = 0
+	n = 1
+	msg = u'Total number of conferences: '+str(len(gch_cnt))+'\n'
+	for i in gch_cnt:
+		msg += str(n)+'. '+i[0]+' ['+str(i[1])+']\n'
+		n += 1
+	reply(type, source, msg)
+    
+def handler_Skylon(type, source, parameters):
+	msg = 'When Cyron, Cylon and Skynet are not enough...  '
+	reply(type, source, msg)
 #def handler_who_was(type, source, parameters):
 	#gch = source[1]
 	#for x in GROUPCHATS[gch].keys():
@@ -418,9 +421,10 @@ register_command_handler(handler_bot_nick, 'botnick', ['muc','all'], 20, 'change
 #register_command_handler(handler_member, 'member', ['muc','all'], 20, 'gives the role of member to a participant in conference', 'member <nick>', ['member roxy'])
 #register_command_handler(handler_moderator, 'mod', ['muc','all'], 20, 'gives soneone the role of moderator note moderators can see jid of others and can also kick', 'mod <nick>', ['mod genko'])
 #register_command_handler(handler_member, 'unmember', ['muc','all'], 20, 'Забрать права зарегистрированного участника чата', 'унмембер <nick>', ['унмембер Вася'])
-#register_command_handler(handler_where, 'show', ['muc','all'], 100, 'shows the list where bot is currently active', 'show', ['show'])
+register_command_handler(handler_where, 'show', ['muc','all'], 100, 'shows the list where bot is currently active', 'show', ['show'])
 register_command_handler(handler_member_everywhere, 'fullmember', ['superadmin','all'], 100, 'member a jid everywhere where bot sits in conference', 'fullmember <jid>', ['fullmember guy@jsmart.web.id'])
 register_command_handler(handler_unmember_everywhere, 'fullunmember', ['superadmin','all'], 100, 'unmember a jid everywhere where bot sits in conference', 'fullunmember <jid>', ['fullunmember guy@jsmart.web.id'])
 register_command_handler(handler_ban_everywhere, 'fullban', ['superadmin','all'], 100, 'ban a jid everywhere where bot sits in conference', 'fullban <jid>', ['fullban guy@jsmart.web.id'])
 register_command_handler(handler_unban_everywhere, 'fullunban', ['superadmin','all'], 100, 'unban a jid everywhere bot sits', 'fullunban <jid>', ['fullunban guy@jsmart.web.id'])
 #register_command_handler(handler_who_was, 'хтобыл', ['muc','all'], 20, 'Показывает ники всех, кто заходил в комнату за текущую сессию бота', 'хтобыл', ['хтобыл'])
+register_command_handler(handler_Skylon, 'skylon', ['superadmin','all'], 100, 'unmember a jid everywhere where bot sits in conference', 'fullunmember <jid>', ['fullunmember guy@jsmart.web.id'])

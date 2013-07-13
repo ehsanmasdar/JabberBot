@@ -45,7 +45,7 @@ def order_check_len_flood(mlen, body, gch, jid, nick):
 	if len(body)>mlen:
 		order_stats[gch][jid]['devoice']['time']=time.time()
 		order_stats[gch][jid]['devoice']['cnd']=1
-		order_kick(gch, nick, u'-len- flood *FUCK*')
+		order_kick(gch, nick, u'-len- flood')
 		return True
 	return False
 				
@@ -191,7 +191,7 @@ def handler_order_join(groupchat, nick, aff, role):
 				if now-order_stats[groupchat][jid]['devoice']['time']>300:
 					order_stats[groupchat][jid]['devoice']['cnd']=0
 				else:
-					order_visitor(groupchat, nick, u'voting rights stripped for previous violations')
+					order_visitor(groupchat, nick, u'Talking rights stripped for previous violations')
 
 			if GCHCFGS[groupchat]['filt']['kicks']['cond']==1:
 				kcnt=GCHCFGS[groupchat]['filt']['kicks']['cnt']
